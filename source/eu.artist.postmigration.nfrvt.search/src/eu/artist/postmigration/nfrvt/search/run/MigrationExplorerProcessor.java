@@ -21,7 +21,6 @@ import org.modelexecution.fuml.nfr.simulation.workload.ServiceCenter;
 import org.modelexecution.fuml.nfr.simulation.workload.Workload;
 import org.modelexecution.fuml.nfr.simulation.workload.WorkloadExtractor;
 import org.modelexecution.fuml.nfr.simulation.workload.WorkloadScenario;
-import org.moeaframework.Executor;
 import org.moeaframework.core.NondominatedPopulation;
 import org.moeaframework.core.Solution;
 import org.moeaframework.core.Variable;
@@ -29,9 +28,11 @@ import org.moeaframework.core.operator.OnePointCrossover;
 import org.moeaframework.core.operator.TournamentSelection;
 import org.moeaframework.core.variable.RealVariable;
 
-import at.ac.tuwien.big.moea.run.executor.EvolutionarySearchExecutorFactory;
-import at.ac.tuwien.big.moea.run.listener.SeedRuntimePrintListener;
-import at.ac.tuwien.big.moea.variable.RandomIntegerVariable;
+import at.ac.tuwien.big.moea.SearchExperiment;
+import at.ac.tuwien.big.moea.SearchResultManager;
+import at.ac.tuwien.big.moea.experiment.executor.listener.SeedRuntimePrintListener;
+import at.ac.tuwien.big.moea.problem.solution.variable.RandomIntegerVariable;
+import at.ac.tuwien.big.moea.search.algorithm.EvolutionaryAlgorithmFactory;
 import eu.artist.postmigration.nfrvt.eval.MigrationEvaluator;
 import eu.artist.postmigration.nfrvt.extensionpoint.FileExtensions;
 import eu.artist.postmigration.nfrvt.lang.common.eval.EvaluationSettings;
@@ -60,7 +61,15 @@ import eu.artist.postmigration.opgml.variable.IPatternTemplateVariable;
 import eu.artist.postmigration.opgml.variable.PatternSelectionSolution;
 
 public class MigrationExplorerProcessor {
-private ConsoleLogger logger;
+	private static final int NR_PATTERNS_CONSIDERED = 6;
+	private static final int NR_REQUESTS = 20;
+	private static final int POPULATION_SIZE = 200;
+	private static final int NR_ITERATIONS = 1000;
+	private static final int TOURNAMENT_SELECTION_K = 2;
+	private static final double PATTERN_MUTATION_PROB = 0.04;
+	private static final int NSGA_III_DIVISIONS = 4;
+	
+	private ConsoleLogger logger;
 	
 	public MigrationExplorerProcessor() { }
 	
@@ -136,10 +145,13 @@ private ConsoleLogger logger;
 		logLine("Evaluate goals");
 		logLine("----------------------------------------");
 		logLine("Read measurements...");
+		
+		// ensure that all measurements are up to date by reloading them in another resource set
+		MigrationResourceSet refreshSet = MigrationLibraryResourcesUtil.createMigrationResourceSet();
 		List<MeasurementModel> measurementModels = new ArrayList<>();
 		for(MeasurementModel measurement : inputMeasurements) {
 			log("  '" + measurement.eResource().getURI() + "'...");
-			measurementModels.add(measurement);
+			measurementModels.add(refreshSet.loadMeasurementModel(measurement.eResource().getURI()));			
 			logLine("done.");
 		}
 		logLine("done.");
@@ -253,12 +265,12 @@ private ConsoleLogger logger;
 		
 		FixedScalingTemplate fixedScaling = new FixedScalingTemplate(
 				model.getServiceClassesArray(), 
-				new RandomIntegerVariable(2, 5));
+				new RandomIntegerVariable(patternSettings.getMinFixedScaling(), patternSettings.getMaxFixedScaling()));
 		
 		AutoScalingTemplate autoScaling = new AutoScalingTemplate(
 				model.getServiceClassesArray(),
-				new RandomIntegerVariable(1, 4),
-				new RandomIntegerVariable(3, 5),
+				new RandomIntegerVariable(patternSettings.getMinMinAutoScaling(), patternSettings.getMaxMinAutoScaling()),
+				new RandomIntegerVariable(patternSettings.getMaxMaxAutoScaling(), patternSettings.getMaxMaxAutoScaling()),
 				new AutoScalingValue[] { AutoScalingValue.Utilization },
 				new RealVariable(0.0, 1.0),
 				new RealVariable(0.0, 1.0));
@@ -317,11 +329,11 @@ private ConsoleLogger logger;
 		log("Save result data in csv files...");
 		handler.writeCSVFiles(absoluteResultPath, true);
 		logLine("done.");
-			FUMLSimulationMeasurementWriter measurementWriter = new FUMLSimulationMeasurementWriter(simulation, 1000);
+		FUMLSimulationMeasurementWriter measurementWriter = new FUMLSimulationMeasurementWriter(simulation, 1000);
 		IPath measurementPath = resultFolder.append(workload.getModelName() + "_simulation." + FileExtensions.getMeasurementModelExtension());
 		log("Save result data in '" + measurementPath + "'...");
 		SaveResult saveModel = measurementWriter.write(measurementPath.toString(), true);
-			if(saveModel.getException() != null) {
+		if(saveModel.getException() != null) {
 			logErrorLine("Can not read or create '" + measurementPath.toString() + "': " + saveModel.getExceptionMessage());
 			return null;
 		} else {
@@ -394,31 +406,31 @@ private ConsoleLogger logger;
 	
 	private List<Transformation> performSearch(MigrationResourceSet resourceSet, OPGMLConverter converter) {
 		logLine("");
-		logLine("Start search...");
+		logLine("Start search with NSGA-III for " + NR_ITERATIONS + " iterations...");
 		logLine("----------------------------------------");
 		
 		logLine("Conversion... done.");
 		PatternSelectionOrchestration orchestration = new PatternSelectionOrchestration(
-				6, 10,
+				NR_PATTERNS_CONSIDERED, NR_REQUESTS,
 				converter.getGoalModel(), converter.getUmlScenarios().get(0),
 				converter.getConfigurations(), converter.getPatternSettings().getPatternImpactEstimates());
 		
-		EvolutionarySearchExecutorFactory<PatternSelectionSolution> problemExecutor = 
-				orchestration.createEvolutionaryExecutorFactory(100, 500);
+		EvolutionaryAlgorithmFactory<PatternSelectionSolution> factory = orchestration.createEvolutionaryAlgorithmFactory(POPULATION_SIZE);
+		orchestration.addAlgorithm(factory.createNSGAIII(
+				NSGA_III_DIVISIONS,
+				new TournamentSelection(TOURNAMENT_SELECTION_K),
+				new OnePointCrossover(1.0), new PatternMutation(PATTERN_MUTATION_PROB)));
 		
-		Executor executor = problemExecutor
-				.setSelection(new TournamentSelection(3, problemExecutor.getDominanceComparator()))
-				.addVariations(new OnePointCrossover(1.0), new PatternMutation(0.04))
-				.createNSGAIIExecutor()
-				.withProgressListener(new SeedRuntimePrintListener())
-				;
+		SearchExperiment experiment = new SearchExperiment(orchestration, POPULATION_SIZE * NR_ITERATIONS);
+		experiment.addProgressListener(new SeedRuntimePrintListener());
+		
+		SearchResultManager manager = new SearchResultManager(experiment);
 		
 		logLine("Search for Solutions...");
-		List<NondominatedPopulation> solutions = executor.runSeeds(1);
-		NondominatedPopulation population = solutions.get(solutions.size() - 1);
+		NondominatedPopulation population = manager.createApproximationSet();
 		logLine("Solution: " + population.size());
 		
-		logLine(orchestration.getPopulationPrinter().print(population));
+		logLine(orchestration.getPopulationWriter().write(population));
 		int sol = 1;
 		for(Solution solution : population) {
 			List<Transformation> transformations = new ArrayList<>();

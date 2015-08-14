@@ -12,7 +12,7 @@
  *******************************************************************************/
 package eu.artist.postmigration.opgml.operator;
 
-import at.ac.tuwien.big.moea.operator.mutation.CompoundMutationVariation;
+import at.ac.tuwien.big.moea.search.algorithm.operator.mutation.CompoundMutationVariation;
 
 public class PatternMutation extends CompoundMutationVariation {
 

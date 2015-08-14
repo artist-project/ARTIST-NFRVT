@@ -103,6 +103,11 @@ public class ARTIST_NFPCatalogue extends AbstractPropertyCatalogue {
 		final QualitativeProperty DEPENDABILITY = ARTIST_NFPCatalogue.getInstance().DEPENDABILITY.getElement();
 		final BaseQuantitativeProperty BUSY_TIME = ARTIST_NFPCatalogue.getInstance().BUSY_TIME.getElement();
 		final BaseQuantitativeProperty AVERAGE_QUEUE_LENGTH = ARTIST_NFPCatalogue.getInstance().AVERAGE_QUEUE_LENGTH.getElement();
+		final BaseQuantitativeProperty COMPOSITION = ARTIST_NFPCatalogue.getInstance().COMPOSITION.getElement();
+		final BaseQuantitativeProperty MESSAGING = ARTIST_NFPCatalogue.getInstance().MESSAGING.getElement();
+		final BaseQuantitativeProperty DESIGN_SIZE = ARTIST_NFPCatalogue.getInstance().DESIGN_SIZE.getElement();
+		final BaseQuantitativeProperty AGGREGATIONS = ARTIST_NFPCatalogue.getInstance().AGGREGATIONS.getElement();
+		final BaseQuantitativeProperty ASSOCIATIONS = ARTIST_NFPCatalogue.getInstance().ASSOCIATIONS.getElement();
 	}
 	
 	public interface FQN {
@@ -173,6 +178,11 @@ public class ARTIST_NFPCatalogue extends AbstractPropertyCatalogue {
 		final String DEPENDABILITY = ARTIST_NFPCatalogue.getInstance().DEPENDABILITY.getFullyQualifiedName();
 		final String BUSY_TIME = ARTIST_NFPCatalogue.getInstance().BUSY_TIME.getFullyQualifiedName();
 		final String AVERAGE_QUEUE_LENGTH = ARTIST_NFPCatalogue.getInstance().AVERAGE_QUEUE_LENGTH.getFullyQualifiedName();
+		final String COMPOSITION = ARTIST_NFPCatalogue.getInstance().COMPOSITION.getFullyQualifiedName();
+		final String MESSAGING = ARTIST_NFPCatalogue.getInstance().MESSAGING.getFullyQualifiedName();
+		final String DESIGN_SIZE = ARTIST_NFPCatalogue.getInstance().DESIGN_SIZE.getFullyQualifiedName();
+		final String AGGREGATIONS = ARTIST_NFPCatalogue.getInstance().AGGREGATIONS.getFullyQualifiedName();
+		final String ASSOCIATIONS = ARTIST_NFPCatalogue.getInstance().ASSOCIATIONS.getFullyQualifiedName();
 	}
 	
 	public interface Uri {
@@ -243,6 +253,11 @@ public class ARTIST_NFPCatalogue extends AbstractPropertyCatalogue {
 		final String DEPENDABILITY = ARTIST_NFPCatalogue.getInstance().DEPENDABILITY.getUri();
 		final String BUSY_TIME = ARTIST_NFPCatalogue.getInstance().BUSY_TIME.getUri();
 		final String AVERAGE_QUEUE_LENGTH = ARTIST_NFPCatalogue.getInstance().AVERAGE_QUEUE_LENGTH.getUri();
+		final String COMPOSITION = ARTIST_NFPCatalogue.getInstance().COMPOSITION.getUri();
+		final String MESSAGING = ARTIST_NFPCatalogue.getInstance().MESSAGING.getUri();
+		final String DESIGN_SIZE = ARTIST_NFPCatalogue.getInstance().DESIGN_SIZE.getUri();
+		final String AGGREGATIONS = ARTIST_NFPCatalogue.getInstance().AGGREGATIONS.getUri();
+		final String ASSOCIATIONS = ARTIST_NFPCatalogue.getInstance().ASSOCIATIONS.getUri();
 	}
 	
 	private static ARTIST_NFPCatalogue instance;
@@ -318,6 +333,11 @@ public class ARTIST_NFPCatalogue extends AbstractPropertyCatalogue {
 	public final MigrationModelElement<QualitativeProperty> DEPENDABILITY;
 	public final MigrationModelElement<BaseQuantitativeProperty> BUSY_TIME;
 	public final MigrationModelElement<BaseQuantitativeProperty> AVERAGE_QUEUE_LENGTH;
+	public final MigrationModelElement<BaseQuantitativeProperty> COMPOSITION;
+	public final MigrationModelElement<BaseQuantitativeProperty> MESSAGING;
+	public final MigrationModelElement<BaseQuantitativeProperty> DESIGN_SIZE;
+	public final MigrationModelElement<BaseQuantitativeProperty> AGGREGATIONS;
+	public final MigrationModelElement<BaseQuantitativeProperty> ASSOCIATIONS;
 	
 	protected ARTIST_NFPCatalogue() {
 		super(CATALOGUE_URI_STRING);
@@ -387,6 +407,11 @@ public class ARTIST_NFPCatalogue extends AbstractPropertyCatalogue {
 		DEPENDABILITY = new MigrationModelElement<QualitativeProperty>(getQualitativePropertyByName("Dependability"));
 		BUSY_TIME = new MigrationModelElement<BaseQuantitativeProperty>(getBaseQuantitativePropertyByName("BusyTime"));
 		AVERAGE_QUEUE_LENGTH = new MigrationModelElement<BaseQuantitativeProperty>(getBaseQuantitativePropertyByName("AverageQueueLength"));
+		COMPOSITION = new MigrationModelElement<BaseQuantitativeProperty>(getBaseQuantitativePropertyByName("Composition"));
+		MESSAGING = new MigrationModelElement<BaseQuantitativeProperty>(getBaseQuantitativePropertyByName("Messaging"));
+		DESIGN_SIZE = new MigrationModelElement<BaseQuantitativeProperty>(getBaseQuantitativePropertyByName("DesignSize"));
+		AGGREGATIONS = new MigrationModelElement<BaseQuantitativeProperty>(getBaseQuantitativePropertyByName("Aggregations"));
+		ASSOCIATIONS = new MigrationModelElement<BaseQuantitativeProperty>(getBaseQuantitativePropertyByName("Associations"));
 	}
 	
 }

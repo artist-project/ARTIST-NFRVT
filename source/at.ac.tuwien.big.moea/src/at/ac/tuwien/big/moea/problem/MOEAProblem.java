@@ -15,8 +15,8 @@ package at.ac.tuwien.big.moea.problem;
 import org.moeaframework.core.Solution;
 import org.moeaframework.problem.AbstractProblem;
 
-import at.ac.tuwien.big.moea.fitness.IFitnessFunction;
-import at.ac.tuwien.big.moea.initialization.solution.ISolutionGenerator;
+import at.ac.tuwien.big.moea.search.fitness.IFitnessFunction;
+import at.ac.tuwien.big.moea.search.solution.generator.solution.ISolutionGenerator;
 
 public class MOEAProblem<S extends Solution> extends AbstractProblem implements IMOEAProblem<S> {
 	
@@ -24,7 +24,7 @@ public class MOEAProblem<S extends Solution> extends AbstractProblem implements 
 	private IFitnessFunction<S> fitnessFunction;
 
 	public MOEAProblem(IFitnessFunction<S> fitnessFunction, ISolutionGenerator<S> solutionGenerator) {
-		super(solutionGenerator.getNrVariables(), solutionGenerator.getNrObjectives(), solutionGenerator.getNrConstraints());
+		super(solutionGenerator.getSolutionLength(), solutionGenerator.getNrObjectives(), solutionGenerator.getNrConstraints());
 		this.fitnessFunction = fitnessFunction;
 		this.solutionGenerator = solutionGenerator;
 	}

@@ -261,16 +261,6 @@
             class="eu.artist.postmigration.nfrvt.lang.common.ui.ARTISTCommonExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
       </participant>
    </extension>
-   <extension
-            point="org.eclipse.ui.preferencePages">
-        <page
-            category="eu.artist.postmigration.nfrvt.lang.common.ARTISTCommon"
-            class="eu.artist.postmigration.nfrvt.lang.common.ui.ARTISTCommonExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-            id="eu.artist.postmigration.nfrvt.lang.common.ARTISTCommon.compiler.preferencePage"
-            name="Compiler">
-            <keywordReference id="eu.artist.postmigration.nfrvt.lang.common.ui.keyword_ARTISTCommon"/>
-        </page>
-    </extension>
     <extension
             point="org.eclipse.ui.propertyPages">
         <page
@@ -372,15 +362,6 @@
          </command>
       </menuContribution>
    </extension>
-   <extension point="org.eclipse.ui.preferencePages">
-	    <page
-	        category="eu.artist.postmigration.nfrvt.lang.common.ARTISTCommon"
-	        class="eu.artist.postmigration.nfrvt.lang.common.ui.ARTISTCommonExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
-	        id="eu.artist.postmigration.nfrvt.lang.common.ARTISTCommon.refactoring"
-	        name="Refactoring">
-	        <keywordReference id="eu.artist.postmigration.nfrvt.lang.common.ui.keyword_ARTISTCommon"/>
-	    </page>
-	</extension>
 
   <extension point="org.eclipse.compare.contentViewers">
     <viewer id="eu.artist.postmigration.nfrvt.lang.common.ARTISTCommon.compare.contentViewers"

@@ -772,4 +772,35 @@ property-catalogue eu.artist.property.catalogue.nonfunctional {
 		type PrimitiveTypes.Real,
 		direction decreasing
 	}
+	
+	
+	quantitative Composition {
+		description "Number of compositions (e.g., average number of aggregations in a software model)",
+		type PrimitiveTypes.Real,
+		direction decreasing
+	}
+	
+	quantitative Messaging {
+		description "Average number of attributes in a software model",
+		type PrimitiveTypes.Real,
+		direction decreasing
+	}
+	
+	quantitative DesignSize {
+		description "Design size of a software  model (number of classes)",
+		type PrimitiveTypes.Integer,
+		direction decreasing
+	}
+	
+	quantitative Aggregations {
+		description "Number of aggregations in a software model",
+		type PrimitiveTypes.Integer,
+		direction decreasing
+	}
+	
+	quantitative Associations {
+		description "Number of aggregations in a software model",
+		type PrimitiveTypes.Integer,
+		direction decreasing
+	}	
 }

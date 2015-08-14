@@ -27,8 +27,8 @@ import org.moeaframework.analysis.collector.InstrumentedAlgorithm;
 import org.moeaframework.analysis.collector.PopulationSizeCollector;
 import org.moeaframework.core.Solution;
 
-import at.ac.tuwien.big.moea.run.collector.LocalBestFitnessCollector;
-import at.ac.tuwien.big.moea.run.collector.SimpleBestSolutionCollector;
+import at.ac.tuwien.big.moea.experiment.instrumenter.collector.LocalBestFitnessCollector;
+import at.ac.tuwien.big.moea.experiment.instrumenter.collector.SimpleBestSolutionCollector;
 
 public class AccumulatorUtil {
 	

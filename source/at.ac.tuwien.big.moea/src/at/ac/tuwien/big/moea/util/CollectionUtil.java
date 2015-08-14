@@ -26,6 +26,12 @@ public class CollectionUtil {
 		return list;
 	}
 	
+	public static <T> T getRandomElement(T[] collection) {
+		if(collection == null || collection.length == 0)
+			return null;
+		return collection[MathUtil.randomInteger(collection.length)];
+	}
+	
 	public static <T> T getRandomElement(List<T> collection) {
 		if(collection == null || collection.size() == 0)
 			return null;

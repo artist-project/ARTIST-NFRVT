@@ -21,7 +21,7 @@ import java.util.TreeSet;
 
 import org.moeaframework.core.Variable;
 
-import at.ac.tuwien.big.moea.solution.MOEASolution;
+import at.ac.tuwien.big.moea.problem.solution.MOEASolution;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;

@@ -1,6 +1,6 @@
 package eu.artist.postmigration.nfrvt.search.run;
 
-import at.ac.tuwien.big.moea.fitness.dimension.AbstractFitnessDimension;
+import at.ac.tuwien.big.moea.search.fitness.dimension.AbstractFitnessDimension;
 import eu.artist.postmigration.opgml.fitness.GoalAnalysisMultiFitnessFunction;
 import eu.artist.postmigration.opgml.fitness.analysis.ScenarioAnalysis;
 import eu.artist.postmigration.opgml.gml.GoalModel;

@@ -12,9 +12,9 @@
  *******************************************************************************/
 package eu.artist.postmigration.opgml.problem;
 
-import at.ac.tuwien.big.moea.fitness.IFitnessFunction;
-import at.ac.tuwien.big.moea.initialization.solution.ISolutionGenerator;
 import at.ac.tuwien.big.moea.problem.MOEAProblem;
+import at.ac.tuwien.big.moea.search.fitness.IFitnessFunction;
+import at.ac.tuwien.big.moea.search.solution.generator.solution.ISolutionGenerator;
 import eu.artist.postmigration.opgml.variable.PatternSelectionSolution;
 
 public class PatternSelectionProblem extends MOEAProblem<PatternSelectionSolution> {

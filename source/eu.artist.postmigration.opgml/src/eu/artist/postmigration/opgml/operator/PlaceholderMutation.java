@@ -14,7 +14,7 @@ package eu.artist.postmigration.opgml.operator;
 
 import org.moeaframework.core.Solution;
 
-import at.ac.tuwien.big.moea.operator.mutation.AbstractMutationVariation;
+import at.ac.tuwien.big.moea.search.algorithm.operator.mutation.AbstractMutationVariation;
 import at.ac.tuwien.big.moea.util.MathUtil;
 import eu.artist.postmigration.opgml.variable.PatternTemplatePlaceholder;
 

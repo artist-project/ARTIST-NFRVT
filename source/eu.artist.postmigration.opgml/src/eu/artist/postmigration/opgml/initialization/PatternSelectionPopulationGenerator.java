@@ -12,8 +12,8 @@
  *******************************************************************************/
 package eu.artist.postmigration.opgml.initialization;
 
-import at.ac.tuwien.big.moea.initialization.RandomPopulationGenerator;
-import at.ac.tuwien.big.moea.initialization.solution.IRandomSolutionGenerator;
+import at.ac.tuwien.big.moea.search.solution.generator.RandomPopulationGenerator;
+import at.ac.tuwien.big.moea.search.solution.generator.solution.IRandomSolutionGenerator;
 import eu.artist.postmigration.opgml.variable.PatternSelectionSolution;
 
 public class PatternSelectionPopulationGenerator extends RandomPopulationGenerator<PatternSelectionSolution>{

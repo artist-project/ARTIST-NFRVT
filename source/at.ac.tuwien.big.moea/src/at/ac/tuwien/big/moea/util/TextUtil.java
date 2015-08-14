@@ -18,7 +18,7 @@ import java.util.Locale;
 
 import org.moeaframework.core.variable.RealVariable;
 
-import at.ac.tuwien.big.moea.variable.RandomIntegerVariable;
+import at.ac.tuwien.big.moea.problem.solution.variable.RandomIntegerVariable;
 
 public class TextUtil {
 	private static final int DEFAULT_MAX_DECIMAL_PLACES = 2;
@@ -84,5 +84,9 @@ public class TextUtil {
 		     return result;
 		   }
 		   return allButLast + ++last;
+	}
+	
+	public static boolean isEmpty(String value) {
+		return value == null || value.isEmpty();
 	}
 }

@@ -23,9 +23,9 @@ import org.moeaframework.core.variable.Grammar;
 import org.moeaframework.core.variable.Permutation;
 import org.moeaframework.core.variable.RealVariable;
 
-import at.ac.tuwien.big.moea.operator.mutation.AbstractMutationVariation;
+import at.ac.tuwien.big.moea.problem.solution.variable.RandomIntegerVariable;
+import at.ac.tuwien.big.moea.search.algorithm.operator.mutation.AbstractMutationVariation;
 import at.ac.tuwien.big.moea.util.CollectionUtil;
-import at.ac.tuwien.big.moea.variable.RandomIntegerVariable;
 import eu.artist.postmigration.opgml.variable.IPatternTemplateVariable;
 import eu.artist.postmigration.opgml.variable.PatternTemplatePlaceholder;
 

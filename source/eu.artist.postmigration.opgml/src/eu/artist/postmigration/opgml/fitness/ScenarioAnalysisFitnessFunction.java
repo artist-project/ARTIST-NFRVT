@@ -15,7 +15,7 @@ package eu.artist.postmigration.opgml.fitness;
 import java.util.Set;
 import java.util.TreeSet;
 
-import at.ac.tuwien.big.moea.fitness.AbstractFitnessFunction;
+import at.ac.tuwien.big.moea.search.fitness.AbstractFitnessFunction;
 import eu.artist.postmigration.opgml.fitness.analysis.ScenarioAnalysis;
 import eu.artist.postmigration.opgml.gml.uml.UMLElement;
 import eu.artist.postmigration.opgml.gml.uml.UMLScenario;

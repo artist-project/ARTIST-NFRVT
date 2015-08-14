@@ -20,8 +20,6 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.events.VerifyEvent;
-import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -33,20 +31,6 @@ import org.eclipse.swt.widgets.Text;
 import eu.artist.postmigration.nfrvt.search.MigrationExplorerActivator;
 
 public class PatternSettingsTab extends AbstractLaunchConfigurationTab {
-	
-//	protected VerifyListener integerVerification = new VerifyListener() {
-//		@Override
-//		public void verifyText(VerifyEvent e) {
-//			e.doit = e.text.isEmpty() || getInteger(e.text) != null;
-//		}
-//	};
-//	
-//	protected VerifyListener doubleVerification = new VerifyListener() {
-//		@Override
-//		public void verifyText(VerifyEvent e) {
-//			e.doit = e.text.isEmpty() || getDouble(e.text) != null;
-//		}
-//	};
 	
 	protected ModifyListener updateModification = new ModifyListener() {
 		@Override

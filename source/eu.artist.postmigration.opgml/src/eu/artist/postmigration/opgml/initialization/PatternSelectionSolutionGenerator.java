@@ -15,7 +15,7 @@ package eu.artist.postmigration.opgml.initialization;
 import org.moeaframework.core.PRNG;
 import org.moeaframework.core.Solution;
 
-import at.ac.tuwien.big.moea.initialization.solution.AbstractRandomSolutionGenerator;
+import at.ac.tuwien.big.moea.search.solution.generator.solution.AbstractRandomSolutionGenerator;
 import eu.artist.postmigration.opgml.variable.IPatternTemplateVariable;
 import eu.artist.postmigration.opgml.variable.PatternSelectionSolution;
 import eu.artist.postmigration.opgml.variable.PatternTemplatePlaceholder;
@@ -25,15 +25,15 @@ public class PatternSelectionSolutionGenerator extends AbstractRandomSolutionGen
 	
 	private IPatternTemplateVariable[] possibleConfigurations;
 
-	public PatternSelectionSolutionGenerator(int nrVariables, int nrObjectives,
+	public PatternSelectionSolutionGenerator(int solutionLength, int nrObjectives,
 			int nrConstraints, IPatternTemplateVariable[] possibleConfigurations) {
-		super(nrVariables, nrObjectives, nrConstraints);
+		super(solutionLength, nrObjectives, nrConstraints);
 		this.possibleConfigurations = possibleConfigurations;
 	}
 	
-	public PatternSelectionSolutionGenerator(int nrVariables, int nrObjectives,
+	public PatternSelectionSolutionGenerator(int solutionLength, int nrObjectives,
 			IPatternTemplateVariable[] possibleConfigurations) {
-		super(nrVariables, nrObjectives, 0);
+		super(solutionLength, nrObjectives, 0);
 		this.possibleConfigurations = possibleConfigurations;
 	}
 

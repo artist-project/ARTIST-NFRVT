@@ -1,7 +1,8 @@
 package eu.artist.postmigration.nfrvt.search.run;
 
-import at.ac.tuwien.big.moea.AbstractProblemOrchestration;
-import at.ac.tuwien.big.moea.initialization.solution.IRandomSolutionGenerator;
+import at.ac.tuwien.big.moea.AbstractSearchOrchestration;
+import at.ac.tuwien.big.moea.search.fitness.IMultiDimensionalFitnessFunction;
+import at.ac.tuwien.big.moea.search.solution.generator.solution.IRandomSolutionGenerator;
 import eu.artist.postmigration.opgml.fitness.analysis.ScenarioAnalysis;
 import eu.artist.postmigration.opgml.gml.GoalModel;
 import eu.artist.postmigration.opgml.gml.uml.UMLScenario;
@@ -10,7 +11,7 @@ import eu.artist.postmigration.opgml.input.PatternImpactEstimates;
 import eu.artist.postmigration.opgml.variable.IPatternTemplateVariable;
 import eu.artist.postmigration.opgml.variable.PatternSelectionSolution;
 
-public class PatternSelectionOrchestration extends AbstractProblemOrchestration<PatternSelectionSolution>{
+public class PatternSelectionOrchestration extends AbstractSearchOrchestration<PatternSelectionSolution>{
 
 	private int nrRequests;
 	private GoalModel goalModel;
@@ -29,9 +30,6 @@ public class PatternSelectionOrchestration extends AbstractProblemOrchestration<
 		this.scenario = scenario;
 		this.configurations = configurations;
 		this.estimates = estimates;
-		setFitnessFunction(new ExtendedGoalFitnessFunction(
-				createAnalysis(getNrRequests()),
-				getGoalModel()));
 	}
 	
 	public GoalModel getGoalModel() {
@@ -64,13 +62,16 @@ public class PatternSelectionOrchestration extends AbstractProblemOrchestration<
 	@Override
 	protected IRandomSolutionGenerator<PatternSelectionSolution> createSolutionGenerator() {
 		return new PatternSelectionSolutionGenerator(
-				getNrVariables(), 
+				getSolutionLength(), 
 				getFitnessFunction().evaluatesNrObjectives(), 
 				getFitnessFunction().evaluatesNrConstraints(), 
 				getConfigurations());
 	}
 
-	public static void main(String[] args) {
-		
+	@Override
+	protected IMultiDimensionalFitnessFunction<PatternSelectionSolution> createFitnessFunction() {
+		return new ExtendedGoalFitnessFunction(
+				createAnalysis(getNrRequests()),
+				getGoalModel());
 	}
 }

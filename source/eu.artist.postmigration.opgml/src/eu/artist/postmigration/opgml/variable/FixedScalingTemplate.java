@@ -12,7 +12,7 @@
  *******************************************************************************/
 package eu.artist.postmigration.opgml.variable;
 
-import at.ac.tuwien.big.moea.variable.RandomIntegerVariable;
+import at.ac.tuwien.big.moea.problem.solution.variable.RandomIntegerVariable;
 import eu.artist.postmigration.opgml.gml.uml.UMLClass;
 
 

@@ -2388,7 +2388,7 @@ public class GMLGrammarAccess extends AbstractGrammarElementFinder {
 	//	"_" | "0".."9" | "+" | "-" | "%" | "*" | "/" | "#" | ">" | "<" | "=" | "§")*;
 	public TerminalRule getIDRule() {
 		return gaARTISTCommon.getIDRule();
-	} 
+	}
 
 	//terminal DATE_TIME returns ecore::EDate: // time zone not working: (('+'|'-') INT ((':' INT) | INT)?)?
 	//	INT "-" INT "-" INT ("T" INT ":" INT (":" INT ("." INT)?)?)?;

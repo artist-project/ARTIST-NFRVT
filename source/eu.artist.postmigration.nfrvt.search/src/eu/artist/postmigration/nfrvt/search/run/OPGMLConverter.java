@@ -21,7 +21,7 @@ import org.modelexecution.fuml.nfr.simulation.workload.WorkloadScenario;
 import org.modelexecution.fuml.nfr.simulation.workload.WorkloadScenarioStep;
 import org.moeaframework.core.variable.RealVariable;
 
-import at.ac.tuwien.big.moea.variable.RandomIntegerVariable;
+import at.ac.tuwien.big.moea.problem.solution.variable.RandomIntegerVariable;
 
 import com.google.common.collect.Lists;
 

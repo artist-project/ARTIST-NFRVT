@@ -25,12 +25,6 @@ Export-Package: eu.artist.postmigration.opgml.fitness;
    org.moeaframework.core.comparator,
    at.ac.tuwien.big.moea.operator.mutation",
  eu.artist.postmigration.opgml.problem;uses:="at.ac.tuwien.big.moea.initialization.solution,at.ac.tuwien.big.moea.fitness,at.ac.tuwien.big.moea.problem",
- eu.artist.postmigration.opgml.unused;
-  uses:="eu.artist.postmigration.opgml.variable,
-   org.moeaframework.core.variable,
-   eu.artist.postmigration.opgml.gml.uml,
-   eu.artist.postmigration.opgml.gml,
-   org.moeaframework.core",
  eu.artist.postmigration.opgml.util;uses:="eu.artist.postmigration.opgml.variable,org.moeaframework.core",
  eu.artist.postmigration.opgml.variable;
   uses:="org.moeaframework.core.variable,

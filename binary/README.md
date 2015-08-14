@@ -1,6 +1,6 @@
 # Non-functional Requirements Verification Tools (NFRVT)
 
-Release date: 30/03/2015, Version: 1.0.0.201503301546
+Release date: 14/08/2015, Version: 1.0.0.201508141052
 
 The provided components enable the user with a way to model migration goals in the context of the reverse engineered UML software models. 
 These goals are collected in a so called goal model and are the objectives why the software is migrated into the cloud in the first place.
@@ -14,8 +14,7 @@ The specified goals then drive forward engineering process in terms of choosing 
 ### Installation
   1. Install and update the latest version of [Eclipse Kepler Modeling Tools](http://www.eclipse.org/downloads/packages/eclipse-modeling-tools/keplersr2). More precisely, while we use the version with the build id `20140224-0627`, newer versions may also work. Please make sure that your Eclipse version has Apache Ant version greater than 1.9. If not, copy the provided zip file into your Eclipse `/dropins` directory.
   2. Install version 2.6 of the [Xtext Framework](http://www.eclipse.org/Xtext/). Specifically, we use version `2.6.0.v201405210727`, but future versions may also work. 
-  3. Install the latest version of [Henshin](http://www.eclipse.org/henshin/). Henshin may be used as a graph transformation engine in the automated pattern application approach.
-  3. Put the respective plugins provided here in the `/dropins` directory of your Eclipse installation. Alternatively you can check out the source code in the [ARTIST GitHub Repository](https://github.com/artist-project/ARTIST/tree/master/source/Tooling/post-migration/nfrvt) and import the projects in Eclipse.
+  3. Put the respective plugins available in the [ARTIST GitHub Repository](https://github.com/artist-project/ARTIST/tree/master/binary/NFRVT) in the `/dropins` directory of your Eclipse installation. Alternatively you can check out the source here and import the projects in Eclipse.
 
 ### Included Functionality  
   * Grammars for modeling property catalogues, pattern catalogues, measurement models, goal models and migration evaluations

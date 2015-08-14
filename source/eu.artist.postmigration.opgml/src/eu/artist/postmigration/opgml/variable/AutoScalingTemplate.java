@@ -14,8 +14,8 @@ package eu.artist.postmigration.opgml.variable;
 
 import org.moeaframework.core.variable.RealVariable;
 
+import at.ac.tuwien.big.moea.problem.solution.variable.RandomIntegerVariable;
 import at.ac.tuwien.big.moea.util.TextUtil;
-import at.ac.tuwien.big.moea.variable.RandomIntegerVariable;
 import eu.artist.postmigration.opgml.gml.uml.UMLClass;
 import eu.artist.postmigration.opgml.util.OPGMLUtil;
 

@@ -12,6 +12,7 @@
  *******************************************************************************/
 package at.ac.tuwien.big.moea.util;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -74,5 +75,21 @@ public class CastUtil {
 	@SuppressWarnings("unchecked")
 	public static <T> Class<T> wrap(Class<T> c) {
 	    return c.isPrimitive() ? (Class<T>) PRIMITIVES_TO_WRAPPERS.get(c) : c;
+	}
+	
+	public static int asInteger(String value) {
+		return Integer.parseInt(value);
+	}
+	
+	public static  double asDouble(String value) {
+		return Double.parseDouble(value);
+	}
+	
+	
+	
+	public static File asFile(String filePath) {
+		if(TextUtil.isEmpty(filePath))
+			return null;
+		return new File(filePath);
 	}
 }
