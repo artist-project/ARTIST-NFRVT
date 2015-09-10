@@ -1,10 +1,25 @@
+/*******************************************************************************
+ * Copyright (c) 2015 Vienna University of Technology.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ * Martin Fleck (Vienna University of Technology) - initial API and implementation
+ *
+ * Initially developed in the context of ARTIST EU project www.artist-project.eu
+ *******************************************************************************/
 package eu.artist.postmigration.nfrvt.search.run;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
@@ -46,8 +61,14 @@ import eu.artist.postmigration.nfrvt.lang.util.MigrationResourceUtil;
 import eu.artist.postmigration.nfrvt.lang.util.builder.MeasurementModelBuilder;
 import eu.artist.postmigration.nfrvt.lang.util.run.ConsoleLogger;
 import eu.artist.postmigration.nfrvt.resources.MigrationLibraryResourcesUtil;
+import eu.artist.postmigration.nfrvt.resources.constants.ARTIST_NFPCatalogue;
+import eu.artist.postmigration.nfrvt.resources.constants.ARTIST_SimpleTypes;
+import eu.artist.postmigration.nfrvt.resources.constants.MARTE_BasicNFPTypes;
 import eu.artist.postmigration.nfrvt.search.run.internal.AnalysisSettings;
 import eu.artist.postmigration.nfrvt.search.run.internal.PatternSettings;
+import eu.artist.postmigration.nfrvt.strategy.benchmark.BenchmarkConstants;
+import eu.artist.postmigration.nfrvt.strategy.benchmark.BenchmarkConstants.WP7_MeasurementType;
+import eu.artist.postmigration.nfrvt.strategy.benchmark.BenchmarkStrategy;
 import eu.artist.postmigration.nfrvt.strategy.fumlsimulation.run.internal.FUMLSimulationMeasurementWriter;
 import eu.artist.postmigration.nfrvt.strategy.staticanalysis.StaticAnalysis;
 import eu.artist.postmigration.opgml.gml.uml.UMLModel;
@@ -192,6 +213,113 @@ public class MigrationExplorerProcessor {
 			return null;
 		}
 		
+	}
+	
+	protected MeasurementModel queryBenchmarkResults(MigrationResourceSet resourceSet, Model umlModel, Path resultFolder) {
+		logLine("Query Benchmarking results");
+		logLine("----------------------------------------");
+		
+		IPath measurementPath = resultFolder.append("benchmarks." + FileExtensions.getMeasurementModelExtension());		
+		logLine("Connect to benchmarking service and save results in '" + measurementPath + "'...");
+
+		MeasurementModelBuilder builder = new MeasurementModelBuilder(resourceSet, measurementPath.toString(), true);
+		builder.addImportNamespace(MARTE_BasicNFPTypes.Element.PACKAGE);
+		builder.addImportNamespace(ARTIST_SimpleTypes.Element.PACKAGE);
+		builder.addImportNamespace(ARTIST_NFPCatalogue.Element.CATALOGUE);		
+		
+		Properties properties = new Properties();
+		IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+		if(umlModel.eResource() != null && workspaceRoot != null) {
+			try {
+				Path path = new Path(umlModel.eResource().getURI().toPlatformString(true));
+				IResource propertyFile = workspaceRoot.getFile(path).getProject().findMember(BenchmarkStrategy.PROPERTY_FILE);
+				if(propertyFile != null) {
+					properties.load(new FileInputStream(propertyFile.getLocation().toFile()));
+					BenchmarkConstants.setProperties(properties);
+				}
+			} catch (IOException e) {
+				System.err.println(e.getMessage()); //
+			}			
+		}
+		if(properties.isEmpty()) 
+			logLine("  No '" + BenchmarkStrategy.PROPERTY_FILE + "' file found, using default connection settings.");
+		else 
+			logLine("  Use custom '" + BenchmarkStrategy.PROPERTY_FILE + "' file.");
+		
+		log("  Retrieve availability results...");
+		if(BenchmarkStrategy.isDBAvailable()) {
+			BenchmarkStrategy.appendAvailabilityMeasurement(builder,
+					ARTIST_SimpleTypes.Element.CLOUD_PROVIDER_LITERALS.AMAZON_EC2, 
+					"AvailabilityObservationAmazonEC2");
+			BenchmarkStrategy.appendAvailabilityMeasurement(builder, 
+					ARTIST_SimpleTypes.Element.CLOUD_PROVIDER_LITERALS.GOOGLE_APP_ENGINE, 
+					"AvailabilityObservationGAE");
+			BenchmarkStrategy.appendAvailabilityMeasurement(builder, 
+					ARTIST_SimpleTypes.Element.CLOUD_PROVIDER_LITERALS.MICROSOFT_AZURE, 
+					"AvailabilityObservationAzure");
+			logLine("done.");
+		} else {
+			logLine("skipped: Database not available.");
+		}
+		
+		boolean error = false;
+		log("  Retrieve response time results...");
+		try {
+			BenchmarkStrategy.appendBenchmarkMeasurement(builder, 
+					WP7_MeasurementType.responseTime, 
+					BenchmarkConstants.Workload.ALL_Y, 
+					ARTIST_SimpleTypes.Element.CLOUD_PROVIDER_LITERALS.AMAZON_EC2, 
+					"ResponseTimeObservationAmazonEC2");
+			BenchmarkStrategy.appendBenchmarkMeasurement(builder, 
+					WP7_MeasurementType.responseTime, 
+					BenchmarkConstants.Workload.ALL_Y, 
+					ARTIST_SimpleTypes.Element.CLOUD_PROVIDER_LITERALS.GOOGLE_APP_ENGINE, 
+					"ResponseTimeObservationGAE");
+			BenchmarkStrategy.appendBenchmarkMeasurement(builder, 
+					WP7_MeasurementType.responseTime, 
+					BenchmarkConstants.Workload.ALL_Y, 
+					ARTIST_SimpleTypes.Element.CLOUD_PROVIDER_LITERALS.MICROSOFT_AZURE, 
+					"ResponseTimeObservationAzure");
+		} catch(Exception e) {
+			error = true;
+			logLine("skipped: " + e.getMessage().replace("\n", " "));
+		}
+		if(!error)
+			logLine("done.");
+		
+		error = false;
+		log("  Retrieve throughput results...");
+		try {
+			BenchmarkStrategy.appendBenchmarkMeasurement(builder, 
+					WP7_MeasurementType.throughput, 
+					BenchmarkConstants.Workload.ALL_Y, 
+					ARTIST_SimpleTypes.Element.CLOUD_PROVIDER_LITERALS.AMAZON_EC2, 
+					"ThroughputObservationAmazonEC2");
+			BenchmarkStrategy.appendBenchmarkMeasurement(builder, 
+					WP7_MeasurementType.throughput, 
+					BenchmarkConstants.Workload.ALL_Y, 
+					ARTIST_SimpleTypes.Element.CLOUD_PROVIDER_LITERALS.GOOGLE_APP_ENGINE, 
+					"ThroughputObservationGAE");
+			BenchmarkStrategy.appendBenchmarkMeasurement(builder, 
+					WP7_MeasurementType.throughput, 
+					BenchmarkConstants.Workload.ALL_Y, 
+					ARTIST_SimpleTypes.Element.CLOUD_PROVIDER_LITERALS.MICROSOFT_AZURE, 
+					"ThroughputObservationAzure");
+		} catch(Exception e) {
+			error = true;
+			logLine("skipped: " + e.getMessage().replace("\n", " "));
+		}	
+		if(!error)
+			logLine("done.");
+		
+		SaveResult saveModel = builder.save();
+		if(saveModel.getException() != null) {
+			logErrorLine("Can not read or create '" + measurementPath.toString() + "': " + saveModel.getExceptionMessage());
+			return null;
+		} else {
+			logLine("done.");
+			return builder.getMeasurementModel();
+		}
 	}
 	
 	protected MeasurementModel performStaticAnalysis(MigrationResourceSet resourceSet, Model umlModel, Path resultFolder) {
@@ -376,6 +504,7 @@ public class MigrationExplorerProcessor {
 		List<MeasurementModel> inputMeasurements = new ArrayList<>();
 		List<Transformation> transformations = null;
 		
+		MeasurementModel measurementModel = null;
 		if(workload != null) {
 			OPGMLConverter converter = new OPGMLConverter(resourceSet, goalModel, workload, patternSettings);
 			
@@ -387,17 +516,23 @@ public class MigrationExplorerProcessor {
 			logLine("----------------------------------------");
 			logLine("");
 		
-			MeasurementModel measurementModel = performfUMLSimulation(resourceSet, workload, analysisSettings.getSimulationTime(), goalScenarios, resultFolder, converter);
+			measurementModel = performfUMLSimulation(resourceSet, workload, analysisSettings.getSimulationTime(), goalScenarios, resultFolder, converter);
 			if(measurementModel != null)
 				inputMeasurements.add(measurementModel);
 		}
 		
 		logLine("----------------------------------------");
 		logLine("");
-		MeasurementModel measurementModel = performStaticAnalysis(resourceSet, umlModel, resultFolder);
+		measurementModel = performStaticAnalysis(resourceSet, umlModel, resultFolder);
 		if(measurementModel != null)
 			inputMeasurements.add(measurementModel);
 		
+		logLine("----------------------------------------");
+		logLine("");
+		measurementModel = queryBenchmarkResults(resourceSet, umlModel, resultFolder);
+		if(measurementModel != null)
+			inputMeasurements.add(measurementModel);
+	
 		logLine("----------------------------------------");
 		logLine("");
 		MigrationEvaluation evaluation = evaluateGoals(resourceSet, goalModel, transformations, inputMeasurements, evaluationSettings);

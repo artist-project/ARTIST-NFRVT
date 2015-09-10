@@ -1,0 +1,144 @@
+import MARTE_Library.BasicNFP_Types.*
+import ARTISTTypes.*
+observation a_name {
+	time 2015-09-08T20:01:59.855,
+	level "Code",
+	type "measured",
+	measurements [
+		benchmark a_name_2015-09-08-20-01-59-855_01 {
+			property eu.artist.^property.catalogue.nonfunctional.AverageResponseTime,
+			provider CloudProvider.AmazonEC2,
+			service "m1.small",
+			test "YCSB",
+			workload "ALL",
+			value 2642.512820512820,
+			info "READ_Averagelatency_ms"
+		},
+		benchmark a_name_2015-09-08-20-01-59-965_02 {
+			property eu.artist.^property.catalogue.nonfunctional.AverageResponseTime,
+			provider CloudProvider.AmazonEC2,
+			service "m1.large",
+			test "YCSB",
+			workload "ALL",
+			value 1567.028571428571,
+			info "READ_Averagelatency_ms"
+		},
+		benchmark a_name_2015-09-08-20-02-00-065_03 {
+			property eu.artist.^property.catalogue.nonfunctional.AverageResponseTime,
+			provider CloudProvider.AmazonEC2,
+			service "m1.medium",
+			test "YCSB",
+			workload "ALL",
+			value 1861.276595744681,
+			info "READ_Averagelatency_ms"
+		},
+		benchmark a_name_2015-09-08-20-02-00-165_04 {
+			property eu.artist.^property.catalogue.nonfunctional.AverageResponseTime,
+			provider CloudProvider.AmazonEC2,
+			service "m1.small",
+			test "YCSB",
+			workload "ALL",
+			value 3033.589743589744,
+			info "INSERT_Averagelatency_ms"
+		},
+		benchmark a_name_2015-09-08-20-02-00-265_05 {
+			property eu.artist.^property.catalogue.nonfunctional.AverageResponseTime,
+			provider CloudProvider.AmazonEC2,
+			service "m1.large",
+			test "YCSB",
+			workload "ALL",
+			value 2225.885714285714,
+			info "INSERT_Averagelatency_ms"
+		},
+		benchmark a_name_2015-09-08-20-02-00-365_06 {
+			property eu.artist.^property.catalogue.nonfunctional.AverageResponseTime,
+			provider CloudProvider.AmazonEC2,
+			service "m1.medium",
+			test "YCSB",
+			workload "ALL",
+			value 3372.170212765957,
+			info "INSERT_Averagelatency_ms"
+		},
+		benchmark a_name_2015-09-08-20-02-00-465_07 {
+			property eu.artist.^property.catalogue.nonfunctional.AverageResponseTime,
+			provider CloudProvider.AmazonEC2,
+			service "m1.small",
+			test "YCSB",
+			workload "ALL",
+			value 5482.282051282052,
+			info "SCAN_Averagelatency_ms"
+		},
+		benchmark a_name_2015-09-08-20-02-00-565_08 {
+			property eu.artist.^property.catalogue.nonfunctional.AverageResponseTime,
+			provider CloudProvider.AmazonEC2,
+			service "m1.large",
+			test "YCSB",
+			workload "ALL",
+			value 14547.97142857143,
+			info "SCAN_Averagelatency_ms"
+		},
+		benchmark a_name_2015-09-08-20-02-00-665_09 {
+			property eu.artist.^property.catalogue.nonfunctional.AverageResponseTime,
+			provider CloudProvider.AmazonEC2,
+			service "m1.medium",
+			test "YCSB",
+			workload "ALL",
+			value 10701.34042553191,
+			info "SCAN_Averagelatency_ms"
+		},
+		benchmark a_name_2015-09-08-20-02-00-765_10 {
+			property eu.artist.^property.catalogue.nonfunctional.AverageResponseTime,
+			provider CloudProvider.AmazonEC2,
+			service "m1.small",
+			test "YCSB",
+			workload "ALL",
+			value 1005.435897435897,
+			info "UPDATE_Averagelatency_ms"
+		},
+		benchmark a_name_2015-09-08-20-02-00-865_11 {
+			property eu.artist.^property.catalogue.nonfunctional.AverageResponseTime,
+			provider CloudProvider.AmazonEC2,
+			service "m1.large",
+			test "YCSB",
+			workload "ALL",
+			value 565.6000000000000,
+			info "UPDATE_Averagelatency_ms"
+		},
+		benchmark a_name_2015-09-08-20-02-00-965_12 {
+			property eu.artist.^property.catalogue.nonfunctional.AverageResponseTime,
+			provider CloudProvider.AmazonEC2,
+			service "m1.medium",
+			test "YCSB",
+			workload "ALL",
+			value 714.1063829787234,
+			info "UPDATE_Averagelatency_ms"
+		},
+		benchmark a_name_2015-09-08-20-02-01-065_13 {
+			property eu.artist.^property.catalogue.nonfunctional.AverageResponseTime,
+			provider CloudProvider.AmazonEC2,
+			service "m1.large",
+			test "YCSB",
+			workload "ALL",
+			value 4726.621428571429,
+			info "average"
+		},
+		benchmark a_name_2015-09-08-20-02-01-165_14 {
+			property eu.artist.^property.catalogue.nonfunctional.AverageResponseTime,
+			provider CloudProvider.AmazonEC2,
+			service "m1.small",
+			test "YCSB",
+			workload "ALL",
+			value 3040.955128205129,
+			info "average"
+		},
+		benchmark a_name_2015-09-08-20-02-01-265_15 {
+			property eu.artist.^property.catalogue.nonfunctional.AverageResponseTime,
+			provider CloudProvider.AmazonEC2,
+			service "m1.medium",
+			test "YCSB",
+			workload "ALL",
+			value 4162.223404255319,
+			info "average"
+		}
+	]
+}

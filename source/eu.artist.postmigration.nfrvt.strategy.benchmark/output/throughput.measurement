@@ -1,0 +1,36 @@
+import MARTE_Library.BasicNFP_Types.*
+import ARTISTTypes.*
+observation a_name2 {
+	time 2015-09-08T20:02:04.013,
+	level "Model",
+	type "measured",
+	measurements [
+		benchmark a_name2_2015-09-08-20-02-04-013_01 {
+			property eu.artist.^property.catalogue.nonfunctional.Throughput,
+			provider CloudProvider.AmazonEC2,
+			service "m1.small",
+			test "YCSB",
+			workload "ALL",
+			value 677.0256410256410,
+			info "Throughput_ops_sec"
+		},
+		benchmark a_name2_2015-09-08-20-02-04-123_02 {
+			property eu.artist.^property.catalogue.nonfunctional.Throughput,
+			provider CloudProvider.AmazonEC2,
+			service "m1.large",
+			test "YCSB",
+			workload "ALL",
+			value 1080.228571428572,
+			info "Throughput_ops_sec"
+		},
+		benchmark a_name2_2015-09-08-20-02-04-223_03 {
+			property eu.artist.^property.catalogue.nonfunctional.Throughput,
+			provider CloudProvider.AmazonEC2,
+			service "m1.medium",
+			test "YCSB",
+			workload "ALL",
+			value 997.2765957446809,
+			info "Throughput_ops_sec"
+		}
+	]
+}

@@ -15,7 +15,8 @@ Require-Bundle: org.modelexecution.fuml.nfr;visibility:=reexport,
  org.modelexecution.fuml;bundle-version="1.0.0",
  eu.artist.postmigration.nfrvt.lang.gml,
  eu.artist.postmigration.nfrvt.strategy.staticanalysis;bundle-version="1.0.0",
- at.ac.tuwien.big.moea
+ at.ac.tuwien.big.moea,
+ eu.artist.postmigration.nfrvt.strategy.benchmark
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: eu.artist.postmigration.nfrvt.search

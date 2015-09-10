@@ -6,9 +6,7 @@ import eu.artist.postmigration.nfrvt.lang.common.artistCommon.ArtistCommonPackag
 import eu.artist.postmigration.nfrvt.lang.common.artistCommon.ImportNamespace;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
@@ -173,5 +171,23 @@ public class ImportNamespaceImpl extends MinimalEObjectImpl.Container implements
     result.append(')');
     return result.toString();
   }
+  
+  /**
+   * @generated NOT
+   */
+  @Override
+	public boolean equals(Object obj) {
+		if(obj == null || !(obj instanceof ImportNamespace))
+			return false;
+		
+		ImportNamespace other = (ImportNamespace) obj;
+		if(other.getImportedNamespace() == null && getImportedNamespace() == null)
+			return true;
+		
+		if(getImportedNamespace() != null)
+			return getImportedNamespace().equals(other.getImportedNamespace());
+		else
+			return other.getImportedNamespace().equals(getImportedNamespace());
+	}
 
 } //ImportNamespaceImpl

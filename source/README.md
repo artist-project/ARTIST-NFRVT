@@ -1,12 +1,12 @@
 # Non-functional Requirements Verification Tools (NFRVT)
 
-Release date: 14/08/2015, Version: 1.0.0.201508141052
+Release date: 10/09/2015, Version: 1.0.0.201509101530
 
 The provided components enable the user with a way to model migration goals in the context of the reverse engineered UML software models. 
 These goals are collected in a so called goal model and are the objectives why the software is migrated into the cloud in the first place.
 Goals are conditions based on (non-functional) properties of the system. 
 These properties can be evaluated using different evaluation strategies and are influenced by the optimization patterns applied during the migration.
-Furthermore, we have developed the MOMoT framework which can guide the application of model transformations towards specific objectives using search-based optimization techniques.
+This components evaluates whether the migration was successful or not in terms of the specified goals and tries to find a good set of optimization patterns using a search-based approach.
 
 From a technical point of view, the goal model is initially created by the maturity assessment tool and further refined by the user. 
 The specified goals then drive forward engineering process in terms of choosing a good set of optimization patterns and provide a way to check whether the migration can be considered successful or not.
@@ -25,7 +25,7 @@ The specified goals then drive forward engineering process in terms of choosing 
   * Supported Drag and Drop from tree-based UML editors
   * Run Dialog to automatically produce the migration evaluation based on a goal model
   * An evaluation strategy for performance-related properties based on the fUML standard
-  * Implementation of a search-based process that guides the application of model transformations towards given objectives/goals
+  * Implementation of a search-based process that guides the application of patterns towards given objectives/goals
 
 ### Reference
 These tools are accompanied by the deliverable D11.3.2 which can be found on the [ARTIST web page](http://artist-project.eu/documents).

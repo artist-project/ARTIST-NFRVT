@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Benchmark Measurement Strategy
+Bundle-SymbolicName: eu.artist.postmigration.nfrvt.strategy.benchmark
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: eu.artist.postmigration.nfrvt.strategy.benchmark.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore,
+ eu.artist.postmigration.nfrvt.resources
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy
+Export-Package: eu.artist.postmigration.nfrvt.strategy.benchmark
+Bundle-ClassPath: lib/mongo-2.4.jar,
+ lib/mysql-connector-java-5.1.18-bin.jar,
+ .
