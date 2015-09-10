@@ -12,6 +12,8 @@ From a technical point of view, the goal model is initially created by the matur
 The specified goals then drive forward engineering process in terms of choosing a good set of optimization patterns and provide a way to check whether the migration can be considered successful or not.
 
 ### Installation
+For a manual installation process, please follow the steps given below. Alternatively you may install the NFRVT tool in Eclipse using the ARTIST Update Site.
+
   1. Install and update the latest version of [Eclipse Kepler Modeling Tools](http://www.eclipse.org/downloads/packages/eclipse-modeling-tools/keplersr2). More precisely, while we use the version with the build id `20140224-0627`, newer versions may also work. Please make sure that your Eclipse version has Apache Ant version greater than 1.9. If not, copy the provided zip file into your Eclipse `/dropins` directory.
   2. Install version 2.6 of the [Xtext Framework](http://www.eclipse.org/Xtext/). Specifically, we use version `2.6.0.v201405210727`, but future versions may also work. 
   3. Put the respective plugins available in the [ARTIST GitHub Repository](https://github.com/artist-project/ARTIST/tree/master/binary/NFRVT) in the `/dropins` directory of your Eclipse installation. Alternatively you can check out the source here and import the projects in Eclipse.
